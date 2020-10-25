@@ -122,11 +122,11 @@ describe("StringBuilder function", function () {
 
         it('full test', function () {
             let str = new StringBuilder('hello');
-            str.append(', there');
+            str.append(', world');
             str.prepend('User, ');
-            str.insertAt('woop', 5);
+            str.insertAt('loop', 5);
             str.remove(6, 3);
-            expect(str.toString()).to.equal('User,w hello, there');
+            expect(str.toString()).to.equal('User,l hello, world');
         });
     });
 });
