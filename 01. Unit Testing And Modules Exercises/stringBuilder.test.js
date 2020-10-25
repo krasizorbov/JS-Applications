@@ -4,7 +4,7 @@ const assert = require('chai').assert;
 
 describe("StringBuilder function", function () {
     describe('constructor', function () {
-        it('Test withh string', function () {
+        it('Test with string', function () {
             let myObj = new StringBuilder('str');
             expect(myObj).to.have.property('_stringArray').with.lengthOf(3);
         });
