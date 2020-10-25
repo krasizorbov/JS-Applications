@@ -5,13 +5,13 @@ const assert = require('chai').assert;
 describe("StringBuilder function", function () {
     describe('constructor', function () {
         it('Test with string', function () {
-            let myObj = new StringBuilder('str');
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(3);
+            let obj = new StringBuilder('str');
+            expect(obj).to.have.property('_stringArray').with.lengthOf(3);
         });
 
         it('Test with empty value', function () {
-            let myObj = new StringBuilder();
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(0);
+            let obj = new StringBuilder();
+            expect(obj).to.have.property('_stringArray').with.lengthOf(0);
         });
 
         it('Test with wrong parameter', function () {
@@ -21,78 +21,78 @@ describe("StringBuilder function", function () {
 
     describe('append', function () {
         it('Test invalid param', function () {
-            let myObj = new StringBuilder('str');
-            expect(() => myObj.append(1)).to.Throw('Argument must be string');
+            let obj = new StringBuilder('str');
+            expect(() => obj.append(1)).to.Throw('Argument must be string');
         });
 
         it('Test new length', function () {
-            let myObj = new StringBuilder('Str');
-            myObj.append('T');
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(4);
+            let obj = new StringBuilder('Str');
+            obj.append('T');
+            expect(obj).to.have.property('_stringArray').with.lengthOf(4);
         });
 
         it('Test if added at the end', function () {
-            let myObj = new StringBuilder('Str');
-            myObj.append('T');
-            expect(myObj._stringArray[3]).to.equal('T');
+            let obj = new StringBuilder('Str');
+            obj.append('T');
+            expect(obj._stringArray[3]).to.equal('T');
         });
     });
 
     describe('prepend', function () {
         it('Test invalid param', function () {
-            let myObj = new StringBuilder('str');
-            expect(() => myObj.prepend(1)).to.Throw('Argument must be string');
+            let obj = new StringBuilder('str');
+            expect(() => obj.prepend(1)).to.Throw('Argument must be string');
         });
 
         it('Test new length', function () {
-            let myObj = new StringBuilder('Str');
-            myObj.prepend('a');
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(4);
+            let obj = new StringBuilder('Str');
+            obj.prepend('a');
+            expect(obj).to.have.property('_stringArray').with.lengthOf(4);
         });
 
         it('Test if added at the beginning', function () {
-            let myObj = new StringBuilder('Str');
-            myObj.prepend('a');
-            expect(myObj._stringArray[0]).to.equal('a');
+            let obj = new StringBuilder('Str');
+            obj.prepend('a');
+            expect(obj._stringArray[0]).to.equal('a');
         });
     });
 
     describe('insertAt', function () {
         it('Test invalid param', function () {
-            let myObj = new StringBuilder('str');
-            expect(() => myObj.insertAt(1, 1)).to.Throw('Argument must be string');
+            let obj = new StringBuilder('str');
+            expect(() => obj.insertAt(1, 1)).to.Throw('Argument must be string');
         });
 
         it('Test new length', function () {
-            let myObj = new StringBuilder('ab');
-            myObj.insertAt('TEST', 1);
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(6);
+            let obj = new StringBuilder('ab');
+            obj.insertAt('TEST', 1);
+            expect(obj).to.have.property('_stringArray').with.lengthOf(6);
         });
 
         it('Test if the string is inserted at index', function () {
-            let myObj = new StringBuilder('ab');
-            myObj.insertAt('TEST', 1);
-            expect(myObj._stringArray[1]).to.equal('T');
+            let obj = new StringBuilder('ab');
+            obj.insertAt('TEST', 1);
+            expect(obj._stringArray[1]).to.equal('T');
         });
     });
 
     describe('remove', function () {
         it('Test new length', function () {
-            let myObj = new StringBuilder('abc');
-            myObj.remove(1, 1);
-            expect(myObj).to.have.property('_stringArray').with.lengthOf(2);
+            let obj = new StringBuilder('abc');
+            obj.remove(1, 1);
+            expect(obj).to.have.property('_stringArray').with.lengthOf(2);
         });
 
         it('Test result', function () {
-            let myObj = new StringBuilder('abc');
-            myObj.remove(1, 1);
-            expect(myObj._stringArray.join('')).to.equal('ac');
+            let obj = new StringBuilder('abc');
+            obj.remove(1, 1);
+            expect(obj._stringArray.join('')).to.equal('ac');
         });
 
         it('Test result', function () {
-            let myObj = new StringBuilder('abc');
-            myObj.remove(1, 2);
-            expect(myObj._stringArray.join('')).to.equal('a');
+            let obj = new StringBuilder('abc');
+            obj.remove(1, 2);
+            expect(obj._stringArray.join('')).to.equal('a');
         });
     });
 
