@@ -124,9 +124,9 @@ describe("StringBuilder function", function () {
             let str = new StringBuilder('hello');
             str.append(', world');
             str.prepend('User, ');
-            str.insertAt('loop', 5);
+            str.insertAt('book', 5);
             str.remove(6, 3);
-            expect(str.toString()).to.equal('User,l hello, world');
+            expect(str.toString()).to.equal('User,b hello, world');
         });
     });
 });
