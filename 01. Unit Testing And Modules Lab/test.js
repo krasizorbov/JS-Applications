@@ -17,3 +17,35 @@ describe("Sum array of numbers", function () {
         expect(sum("invalid data")).to.be.NaN;
     });
 });
+
+let isSymmetric = require("./checkForSymmetry.js").isSymmetric;
+
+describe("isSymmetric(arr)", function () {
+    it("should return true for [3,4,5,5,4,3]", function () {
+        expect(isSymmetric([3, 4, 5, 5, 4, 3])).to.be.equal(true);
+    });
+    it("should return false for [1,2,3,4,2,1]", function () {
+        expect(isSymmetric([1, 2, 3, 4, 2, 1])).to.be.equal(false);
+    });
+    it("should return true for [-1,2,-1]", function () {
+        expect(isSymmetric([-1, 2, -1])).to.be.equal(true);
+    });
+    it("should return false for [-1,2,1]", function () {
+        expect(isSymmetric([-1, 2, 1])).to.be.equal(false);
+    });
+    it("should return false for [1,2]", function () {
+        expect(isSymmetric([1, 2])).to.be.equal(false);
+    });
+    it("should return true for [1]", function () {
+        expect(isSymmetric([1])).to.be.equal(true);
+    });
+    it("should return true for [10,'hello world', {pesho:5}, new Date(), {pesho:5},'hello world',10]", function () {
+        expect(isSymmetric([10, 'hello world', {pesho: 5}, new Date(), {pesho: 5}, 'hello world', 10])).to.be.equal(true);
+    });
+    it("should return false for [10,'hello world',{pesho:5},new Date(),{Pesho:5},'hello world',10]", function () {
+        expect(isSymmetric([10, 'hello world', {pesho: 5}, new Date(), {Pesho: 5}, 'hello world', 5])).to.be.equal(false);
+    });
+    it("should return false for 1,2,2,1", function () {
+        expect(isSymmetric(1, 2, 2, 1)).to.be.equal(false);
+    });
+});
