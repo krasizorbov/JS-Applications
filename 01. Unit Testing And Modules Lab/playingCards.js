@@ -32,4 +32,4 @@ function solution(face, suit){
     let card = new Card(face, suit);
     return card.toString();
 }
-solution('A', 'S')
+console.log(solution('A', 'S'))
