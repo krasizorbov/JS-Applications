@@ -32,9 +32,7 @@ describe('Tests', () => {
         it('Test functionality', () => {
             const result = warehouse.addProduct("Food", "Test", 20);
             expect(warehouse.availableProducts.Food.Test).to.equal(20);
-            expect(result).to.deep.equal({
-                Test: 20
-            });
+            expect(result).to.deep.equal({Test: 20});
         });
     });
 
