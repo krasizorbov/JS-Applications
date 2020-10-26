@@ -35,6 +35,12 @@ describe("Math Enforcer", function(){
     })
 
     describe("Add Five", function(){
+        it("should return 15.5 if parameter equal 10.5", function(){
+            expect(mathEnforcer.addFive(10.5)).to.equal(15.5, "Function did not return the correct result!")
+        });
+    })
+
+    describe("Add Five", function(){
         it("should return negative number if parameter equal -6 or greater", function(){
             expect(mathEnforcer.addFive(-6)).to.equal(-1, "Function did not return the correct result!")
         });
@@ -49,6 +55,12 @@ describe("Math Enforcer", function(){
     describe("Subtract Ten", function(){
         it("should return 0 if parameter equals to 10", function(){
             expect(mathEnforcer.subtractTen(10)).to.equal(0, "Function did not return the correct result!")
+        });
+    })
+
+    describe("Subtract Ten", function(){
+        it("should return -20.5 if parameter equals to -10.5", function(){
+            expect(mathEnforcer.subtractTen(-10.5)).to.equal(-20.5, "Function did not return the correct result!")
         });
     })
 
@@ -79,6 +91,18 @@ describe("Math Enforcer", function(){
     describe("Sum", function(){
         it("should return negative number if first and second parameters are negative", function(){
             expect(mathEnforcer.sum(-10, -10)).to.equal(-20, "Function did not return the correct result!")
+        });
+    })
+
+    describe("Sum", function(){
+        it("should return 20.5", function(){
+            expect(mathEnforcer.sum(10.5, 10)).to.equal(20.5, "Function did not return the correct result!")
+        });
+    })
+
+    describe("Sum", function(){
+        it("should return 20.5", function(){
+            expect(mathEnforcer.sum(10, 10.5)).to.equal(20.5, "Function did not return the correct result!")
         });
     })
 })
