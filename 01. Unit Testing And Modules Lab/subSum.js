@@ -1,25 +1,14 @@
-function solution(arr, start, end){
-    for(let i = 0; i < arr.length; i++){
-        if (typeof arr[i] !== "number") {
-            return NaN;
-        }
+function solution(array, a, b) {
+    if (!Array.isArray(array) || !array.every(x => typeof (x) === "number")) {
+        return NaN;
     }
-    let result = [];
-    for(let i = 0; i < arr.length; i++){
-        if (typeof arr[i] == "number") {
-            result.push(Number(arr[i]));
-        }
+    if (a < 0) {
+        a = 0;
     }
-    if (start < 0) {
-        start = 0;
+    if (b > array.length) {
+        b = array.length;
     }
-    if (end < 0 || end > arr.length -1) {
-        end = arr.length - 1;
-    }
-    let sum = 0;
-    for(let i = start; i <= end; i++){
-        sum += result[i];
-    }
-    return sum;
+
+    return array.slice(a, b + 1).reduce((a, b) => a + b, 0);
 }
 solution([10, 'twenty', 30, 40], 0, 2)
