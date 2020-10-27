@@ -19,7 +19,7 @@ describe("Console Tests", function(){
         })
 
         it("Should throw an error if number of parameters is not correct", function(){
-            let [message, param1, param2] = ["The sum of {0} and {1} is {2}", 1,2];
+            let [message, param1, param2] = ["The sum of {0} and {1} is {2}", 1, 2];
             expect(() => Console.writeLine(message, param1, param2)).to.Throw("Incorrect amount of parameters given!");
         })
 
@@ -34,7 +34,7 @@ describe("Console Tests", function(){
         })
 
         it("Should return a correct output", function(){
-            let [message, param1, param2, param3] = ["The sum of {0} and {1} is {2}", 1,2,3];
+            let [message, param1, param2, param3] = ["The sum of {0} and {1} is {2}", 1, 2, 3];
             expect(Console.writeLine(message, param1, param2, param3)).to.equal("The sum of 1 and 2 is 3");
         })
     })
