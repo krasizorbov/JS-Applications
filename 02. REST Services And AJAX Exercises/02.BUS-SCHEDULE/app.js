@@ -8,7 +8,7 @@ function solve() {
         let url = `https://judgetests.firebaseio.com/schedule/${currentId}.json `;
 
         fetch(url)
-        .then((resource) => resource.json())
+        .then((response) => response.json())
         .then((result) => {info.textContent = `Next stop ${result.name}`})
         .catch(Error());
 
@@ -20,7 +20,7 @@ function solve() {
         let url = `https://judgetests.firebaseio.com/schedule/${currentId}.json `;
         
         fetch(url)
-        .then((resource) => resource.json())
+        .then((response) => response.json())
         .then((result) => {info.textContent = `Arriving at ${result.name}`
         currentId = result.next})
         .catch(Error());

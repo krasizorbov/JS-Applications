@@ -9,7 +9,7 @@ function attachEvents() {
     // GET
     function loadPhoneBook(){
         fetch(url)
-        .then(resources => resources.json())
+        .then(response => response.json())
         .then(result => {
         ul.innerHTML = "";
         for (const obj of Object.entries(result)) {

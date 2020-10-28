@@ -9,7 +9,7 @@ function attachEvents() {
 
     function refreshMessages(){
         fetch(url)
-        .then(resources => resources.json())
+        .then(response => response.json())
         .then(result => {
             textArea.value = "";
             textArea.disabled = false;
