@@ -46,9 +46,7 @@ function attachEvents() {
     // DELETE
     function deletePhoneNumber(){
         const id = this.id;
-        const headers = {
-            method: "DELETE"
-        };
+        const headers = {method: "DELETE"};
         fetch(`https://phonebook-nakov.firebaseio.com/phonebook/${id}.json`, headers)
             .then(() => {
                 ul.innerHTML = "";
