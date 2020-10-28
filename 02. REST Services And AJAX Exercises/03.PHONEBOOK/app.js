@@ -6,7 +6,7 @@ function attachEvents() {
 
     loadBtn.addEventListener("click", loadPhoneBook);
     createBtn.addEventListener("click", createPhoneBook);
-
+    // GET
     function loadPhoneBook(){
         fetch(url)
         .then(resources => resources.json())
@@ -25,7 +25,7 @@ function attachEvents() {
         })
         .catch(() => console.log("Error"));
     }
-
+    // POST
     function createPhoneBook(){
         const person = document.getElementById("person").value;
         const phone = document.getElementById("phone").value;
@@ -43,7 +43,7 @@ function attachEvents() {
             })
             .catch(() => console.log("Error"));
     }
-
+    // DELETE
     function deletePhoneNumber(){
         const id = this.id;
         const headers = {
