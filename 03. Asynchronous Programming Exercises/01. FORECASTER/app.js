@@ -1,5 +1,4 @@
 function attachEvents() {
-    // Все още не е завършено работи на 85%
     const location = document.getElementById("location");
     const submit = document.getElementById("submit");
     let forecastDIV = document.getElementById("forecast");
@@ -39,14 +38,13 @@ function attachEvents() {
                 currentDIV.children[1].remove();
                 upcomingDIV.children[1].remove();
             }
-            // if (code === undefined) {
-            //     forecastDIV.appendChild(errorDIV);
-            //     return;
-            // } else{
-
-            // }
-            
-                
+            if (forecastDIV.children[2] !== undefined) {
+                forecastDIV.children[2].remove();
+            }
+            if (code === undefined) {
+                forecastDIV.appendChild(errorDIV);
+                return;
+            }
             getCurrentConditions(code);
             getThreeDaysForecast(code);
         })
