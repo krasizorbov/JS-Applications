@@ -5,6 +5,7 @@ function attachEvents() {
     let forecastDIV = document.getElementById("forecast");
     let currentDIV = document.getElementById("current");
     let upcomingDIV = document.getElementById("upcoming");
+    const errorDIV = ce("div", "Error");
 
     const symbols = {
         Sunny: "☀",
@@ -15,12 +16,15 @@ function attachEvents() {
     };
 
     submit.addEventListener("click", getLocationAndCode);
-
-    let name = location.value[0].toUpperCase() + location.value.substring(1);
-    let code;
-    let error = "Error";
+  
     function getLocationAndCode(){
         const clURL = `https://judgetests.firebaseio.com/locations.json`;
+        let name;
+        if (location.value[0] === undefined) {
+            return;
+        }
+        name = location.value[0].toUpperCase() + location.value.substring(1);
+        let code;
         fetch(clURL)
         .then(response => response.json())
         .then(result => {
@@ -30,6 +34,19 @@ function attachEvents() {
                 }
             }
             forecastDIV.style.display = "block";
+            location.value = "";
+            if(currentDIV.children[1]){
+                currentDIV.children[1].remove();
+                upcomingDIV.children[1].remove();
+            }
+            // if (code === undefined) {
+            //     forecastDIV.appendChild(errorDIV);
+            //     return;
+            // } else{
+
+            // }
+            
+                
             getCurrentConditions(code);
             getThreeDaysForecast(code);
         })
@@ -60,7 +77,7 @@ function attachEvents() {
             for (const a of arr) {
                 let upcomingSpan = ce("span", "", "upcoming");
                 let symbolSpan = ce("span", displaySymbol(a.condition), "symbol");
-                let degreeSpan = ce("span", `${a.low}/${a.high}`, "forecast-data");
+                let degreeSpan = ce("span", `${a.low}${symbols.degrees}/${a.high}${symbols.degrees}`, "forecast-data");
                 let conditionSpan = ce("span", a.condition, "forecast-data");
                 upcomingSpan.appendChild(symbolSpan);
                 upcomingSpan.appendChild(degreeSpan);
@@ -84,7 +101,7 @@ function attachEvents() {
         })
         .catch();
 
-        function createHTMLforCurrentConditions(name, conditionSymbol, high, low, condition){
+        function createHTMLforCurrentConditions(name, conditionSymbol, high, low, condition){  
             let forecastsDIV = ce("div", "", "forecasts");
             currentDIV.appendChild(forecastsDIV);
             let conditionSymbolSpan = ce("span", conditionSymbol, "condition symbol");
