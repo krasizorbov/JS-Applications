@@ -38,7 +38,7 @@ function attachEvents() {
                 currentDIV.children[1].remove();
                 upcomingDIV.children[1].remove();
             }
-            if (forecastDIV.children[2] !== undefined) {
+            if (forecastDIV.children[2]) {
                 forecastDIV.children[2].remove();
             }
             if (code === undefined) {
