@@ -1,5 +1,5 @@
-function attachEvents() {
-    const location = document.getElementById("location");
+import * as data from './data.js';
+function attachEvents(){
     const submit = document.getElementById("submit");
     let forecastDIV = document.getElementById("forecast");
     let currentDIV = document.getElementById("current");
@@ -14,132 +14,86 @@ function attachEvents() {
         degrees: "°"
     };
 
-    submit.addEventListener("click", getLocationAndCode);
-  
-    function getLocationAndCode(){
-        const clURL = `https://judgetests.firebaseio.com/locations.json`;
-        let name;
-        if (location.value[0] === undefined) {
+    submit.addEventListener("click", getForecast);
+
+    async function getForecast(){
+        const location = document.getElementById("location").value;
+        forecastDIV.style.display = "block";
+        if(currentDIV.children[1]){
+            currentDIV.children[1].remove();
+            upcomingDIV.children[1].remove();
+        }
+        if (forecastDIV.children[2]) {
+            forecastDIV.children[2].remove();
+        }
+        let code = "";
+        try{
+            code = await data.getCode(location);
+        }  catch(err){
+            forecastDIV.appendChild(errorDIV);
             return;
         }
-        name = location.value[0].toUpperCase() + location.value.substring(1);
-        let code;
-        fetch(clURL)
-        .then(response => response.json())
-        .then(result => {
-            for (const key in result) {
-                if (result[key].name === name) {
-                    code = result[key].code;
-                }
-            }
-            forecastDIV.style.display = "block";
-            location.value = "";
-            if(currentDIV.children[1]){
-                currentDIV.children[1].remove();
-                upcomingDIV.children[1].remove();
-            }
-            if (forecastDIV.children[2]) {
-                forecastDIV.children[2].remove();
-            }
-            if (code === undefined) {
-                forecastDIV.appendChild(errorDIV);
-                return;
-            }
-            getCurrentConditions(code);
-            getThreeDaysForecast(code);
-        })
-        .catch()
-    }
+        const todayFunc = data.getToday(code);
+        const upcomingFunc = data.getUpcoming(code);
+        const [today, upcoming] = [await todayFunc, await upcomingFunc];
+        document.getElementById("location").value = "";
 
-    function getThreeDaysForecast(code){
-        let tdcURL = `https://judgetests.firebaseio.com/forecast/upcoming/${code}.json`;
-        fetch(tdcURL)
-        .then(response => response.json())
-        .then(result => {
-            let arr = [];
-            for (const key in result.forecast) {
-                let obj = {
-                    condition: result.forecast[key].condition,
-                    low: result.forecast[key].low,
-                    high: result.forecast[key].high
-                }
-                arr.push(obj);
-            }
-            createHTMLforUpcomingDays(arr);
-        })
-        .catch();
+        // Forecast for Today HTML
+        let forecastsDIV = ce("div", "", "forecasts");
+        currentDIV.appendChild(forecastsDIV);
+        let conditionSymbolSpan = ce("span", displaySymbol(today.forecast.condition),"condition symbol");
+        forecastsDIV.appendChild(conditionSymbolSpan);
+        let conditionSpan = ce("span", "", "condition");
+        forecastsDIV.appendChild(conditionSpan);
+        let nameSpan = ce("span", today.name, "forecast-data");
+        let degreeSpan = ce("span", `${today.forecast.low}${symbols.degrees}/${today.forecast.high}${symbols.degrees}`, "forecast-data");
+        let conditionNameSpan = ce("span", today.forecast.condition, "forecast-data");
+        conditionSpan.appendChild(nameSpan);
+        conditionSpan.appendChild(degreeSpan);
+        conditionSpan.appendChild(conditionNameSpan);
 
-        function createHTMLforUpcomingDays(arr){
-            let forecastDIV = ce("div", "", "forecast-info");
-            upcomingDIV.appendChild(forecastDIV);
-            for (const a of arr) {
-                let upcomingSpan = ce("span", "", "upcoming");
-                let symbolSpan = ce("span", displaySymbol(a.condition), "symbol");
-                let degreeSpan = ce("span", `${a.low}${symbols.degrees}/${a.high}${symbols.degrees}`, "forecast-data");
-                let conditionSpan = ce("span", a.condition, "forecast-data");
-                upcomingSpan.appendChild(symbolSpan);
-                upcomingSpan.appendChild(degreeSpan);
-                upcomingSpan.appendChild(conditionSpan);
-                forecastDIV.appendChild(upcomingSpan);
-            }
-        }
-    }
-
-    function getCurrentConditions(code){
-        let ccURL = `https://judgetests.firebaseio.com/forecast/today/${code}.json `;
-        fetch(ccURL)
-        .then(response => response.json())
-        .then(result => {
-            let name = result.name;
-            let condition = result.forecast.condition;
-            let conditionSymbol = displaySymbol(condition); 
-            let high = result.forecast.high + symbols.degrees;
-            let low = result.forecast.low + symbols.degrees;
-            createHTMLforCurrentConditions(name, conditionSymbol, high, low, condition);
-        })
-        .catch();
-
-        function createHTMLforCurrentConditions(name, conditionSymbol, high, low, condition){  
-            let forecastsDIV = ce("div", "", "forecasts");
-            currentDIV.appendChild(forecastsDIV);
-            let conditionSymbolSpan = ce("span", conditionSymbol, "condition symbol");
-            forecastsDIV.appendChild(conditionSymbolSpan);
-            let conditionSpan = ce("span", "", "condition");
-            forecastsDIV.appendChild(conditionSpan);
-            let nameSpan = ce("span", name, "forecast-data");
-            let degreeSpan = ce("span", `${low}/${high}`, "forecast-data");
-            let conditionNameSpan = ce("span", condition, "forecast-data");
-            conditionSpan.appendChild(nameSpan);
-            conditionSpan.appendChild(degreeSpan);
-            conditionSpan.appendChild(conditionNameSpan);
-        }
+        // Forecast for upcoming Days HTML
+        let forecastInfoDIV = ce("div", "", "forecast-info");
+        upcomingDIV.appendChild(forecastInfoDIV);
+        for (const a of Array.from(upcoming.forecast)) {
+            let upcomingSpan = ce("span", "", "upcoming");
+            let symbolSpan = ce("span", displaySymbol(a.condition),"symbol");
+            let degreeSpan = ce("span", `${a.low}${symbols.degrees}/${a.high}${symbols.degrees}`, "forecast-data");
+            let conditionSpan = ce("span", a.condition,"forecast-data");
+            upcomingSpan.appendChild(symbolSpan);
+            upcomingSpan.appendChild(degreeSpan);
+            upcomingSpan.appendChild(conditionSpan);
+            forecastInfoDIV.appendChild(upcomingSpan);
+        } 
     }
 
     function displaySymbol(condition){
+        let result;
         if (condition === "Sunny") {
-            conditionSymbol = symbols.Sunny;
+            result = symbols.Sunny;
         } else if(condition === "Partly sunny"){
-            conditionSymbol = symbols.Partlysunny;
+            result = symbols.Partlysunny;
         } else if(condition === "Overcast"){
-            conditionSymbol = symbols.Overcast;
+            result = symbols.Overcast;
         } else if(condition === "Rain"){
-            conditionSymbol = symbols.Rain;
+            result = symbols.Rain;
         }
-        return conditionSymbol;
+        return result;
     }
 
     function ce(el, text, className, id) {
         let e = document.createElement(el);
         if (text) {
-          e.textContent = text;
+            e.textContent = text;
         }
         if (className) {
-          e.classList = className;
+            e.classList = className;
         }
         if (id) {
-          e.id = id;
+            e.id = id;
         }
         return e;
       }
-}
+}    
+
 attachEvents();
