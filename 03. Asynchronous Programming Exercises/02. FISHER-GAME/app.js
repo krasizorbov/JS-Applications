@@ -79,9 +79,7 @@ function attachEvents(){
         const headers = {method: "DELETE"};
 
         data().deleteCatch(id, headers)
-            .then(() => {
-                loadData();
-            })
+            .then(() => {loadData();})
             .catch((error) => console.log(error.message));
     }
 
@@ -101,9 +99,7 @@ function attachEvents(){
     };
 
     data().updateCatch(id, headers)
-        .then(() => {
-            loadData();
-        })
+        .then(() => {loadData();})
         .catch(() => console.log("Error"));
     }
 
@@ -121,9 +117,7 @@ function attachEvents(){
             })
         };
         data().addCatch(headers)
-        .then(() => {
-            loadData();
-        })
+        .then(() => {loadData();})
         .catch(() => console.log("Error"));
     }
 
