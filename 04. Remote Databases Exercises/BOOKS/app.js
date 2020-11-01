@@ -100,6 +100,9 @@ function books(){
         })
 
         this.addEventListener("click", () => {
+            if (titleInput.value === "" || authorInput.value === "" || isbnInput.value === "") {
+                return;
+            }
             const book = {title: titleInput.value, author: authorInput.value, isbn: isbnInput.value, objectId: id};
             data.updateBook(book);
 
