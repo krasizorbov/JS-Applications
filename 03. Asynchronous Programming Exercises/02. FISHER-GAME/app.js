@@ -69,7 +69,6 @@ function attachEvents(){
         if (arr.length > 1) {
             for(let i = 1; i < arr.length; i++){
                 arr[i].remove();
-                i--;
             }
         }
     }
@@ -100,7 +99,7 @@ function attachEvents(){
     };
 
     data().updateCatch(id, headers)
-        .then(() => {loadData();})
+        .then(() => {loadData()})
         .catch(() => console.log("Error"));
     }
 
