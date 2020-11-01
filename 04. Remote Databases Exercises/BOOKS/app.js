@@ -55,6 +55,7 @@ function books(){
         form[0].value = "";
         form[1].value = "";
         form[2].value = "";
+        loadBooks();
     }
 
     async function updateBook(){
