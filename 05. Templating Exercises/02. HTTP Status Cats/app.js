@@ -6,9 +6,9 @@ window.addEventListener("load", async () => {
     const html = catTemplate({cats});
     el.innerHTML = html;
 
-    el.addEventListener("click", showInfo);
+    el.addEventListener("click", showData);
 
-    function showInfo(e) {
+    function showData(e) {
         if (e.target.tagName !== "BUTTON") {
             return;
         }
