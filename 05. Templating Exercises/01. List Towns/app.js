@@ -11,7 +11,6 @@ window.addEventListener("load", async () => {
     function showInfo(e){
         e.preventDefault();
         const towns = document.querySelector('#towns').value.split(', ');
-        const generateHTML = templateFunc({towns});
-        document.querySelector('#root').innerHTML = generateHTML;
+        document.querySelector('#root').innerHTML = templateFunc({towns});
     }
 });
