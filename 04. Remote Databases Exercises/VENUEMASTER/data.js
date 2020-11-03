@@ -20,7 +20,7 @@ function makeHeaders(method, data) {
 
 function handleError(e) {
     if (!e.ok) {
-        throw new Error(`${e.status} - ${e.statusText}`);
+        alert(`${e.status} - ${e.statusText}`);
     }
     return e;
 }
@@ -43,6 +43,5 @@ export async function get(kinveyModule, endpoint) {
 
 export async function post(kinveyModule, endpoint, data) {
     const headers = makeHeaders("POST", data);
-    console.log(headers);
     return fetchRequest(kinveyModule, endpoint, headers);
 }
