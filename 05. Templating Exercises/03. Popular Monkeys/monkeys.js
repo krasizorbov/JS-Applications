@@ -1,4 +1,4 @@
-const monkeys = [
+export const monkeys = [
   {
     id: 1,
     name: "Chim Chim",
