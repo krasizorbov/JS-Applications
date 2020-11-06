@@ -1,18 +1,13 @@
-export default async function (){
-    this.partials = {
-        header: await this.load('./templates/common/header.hbs'),
-        footer: await this.load('./templates/common/footer.hbs'),
-        team: await this.load('./templates/catalog/team.hbs')
-       };
+import { getTeams } from "../data.js";
 
-       const data = Object.assign({}, this.app.userData);
-       data.teams = [
-           {teamId: 123, name: "Cherry", comment: "Get lost"},
-           {teamId: 124, name: "Apple", comment: "I will find you"},
-           {teamId: 125, name: "Banana", comment: "Nevermind"},
-       ]
+export default async function () {
+  this.partials = {
+    header: await this.load("./templates/common/header.hbs"),
+    footer: await this.load("./templates/common/footer.hbs"),
+    team: await this.load("./templates/catalog/team.hbs"),
+  };
 
-       this.partial('./templates/catalog/teamCatalog.hbs', data); 
-       
-       
+  const teams = await getTeams();
+  const data = Object.assign({ teams }, this.app.userData);
+  this.partial("./templates/catalog/teamCatalog.hbs", data);
 }
