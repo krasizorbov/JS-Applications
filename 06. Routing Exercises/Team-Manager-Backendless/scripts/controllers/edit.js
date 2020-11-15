@@ -3,6 +3,7 @@ import { leave } from "../data.js";
 import { join } from "../data.js";
 import { getTeamById } from "../data.js";
 import { updateUserDoesNotHaveTeamBoolean } from "../data.js";
+import { updateUserHasTeamBoolean } from "../data.js";
 
 export default async function () {
   this.partials = {
@@ -48,6 +49,8 @@ export async function leaveTeam() {
     await updateUserDoesNotHaveTeamBoolean(userId);
     this.app.userData.isOnTeam = false;
     this.app.userData.hasTeam = false;
+    localStorage.setItem("hasTeam", false);
+    localStorage.setItem("isOnTeam", false);
     this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);
@@ -55,10 +58,11 @@ export async function leaveTeam() {
 }
 
 export async function joinTeam() {
-  if (this.app.userData.isOnTeam === true) {
+  if (localStorage.getItem("isOnTeam") === "true") {
     alert(
       "You are already a member of a team!\nPlease leave your current team first!"
     );
+    this.redirect(`#/catalog/${this.params.id}`);
     return;
   }
   const team = await getTeamById(this.params.id);
@@ -70,7 +74,12 @@ export async function joinTeam() {
       alert(result.message);
       return;
     }
+    const userId = localStorage.getItem("userId");
+    await updateUserHasTeamBoolean(userId);
     this.app.userData.hasTeam = true;
+    this.app.userData.isOnTeam === true;
+    localStorage.setItem("hasTeam", true);
+    localStorage.setItem("isOnTeam", true);
     this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);

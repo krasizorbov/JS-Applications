@@ -153,7 +153,6 @@ export async function leave(team, id) {
 
 export async function join(team, id) {
   const token = localStorage.getItem("userToken");
-  const userId = localStorage.getItem("userId");
   if (!token) {
     alert("User is not logged in!");
   }
@@ -168,11 +167,6 @@ export async function join(team, id) {
   const data = await response.json();
   if (data.hasOwnProperty("errorData")) {
     alert(data.message);
-    return;
-  }
-  const result = await updateUserHasTeamBoolean(userId);
-  if (result.hasOwnProperty("errorData")) {
-    alert(result.message);
     return;
   }
   return data;
