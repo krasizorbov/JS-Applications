@@ -51,7 +51,7 @@ export async function leaveTeam() {
     this.app.userData.hasTeam = false;
     localStorage.setItem("hasTeam", false);
     localStorage.setItem("isOnTeam", false);
-    this.redirect(`#/catalog/${this.params.id}`);
+    this.redirect(`#/catalog`);
   } catch (error) {
     alert(error.message);
   }
