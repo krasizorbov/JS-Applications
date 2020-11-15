@@ -5,7 +5,7 @@ import register, { registerForm } from "./controllers/register.js";
 import catalog from "./controllers/catalog.js";
 import details from "./controllers/details.js";
 import create, { createForm } from "./controllers/create.js";
-import edit from "./controllers/edit.js";
+import edit, { editTeam, leaveTeam, joinTeam } from "./controllers/edit.js";
 
 $(() => {
   const app = Sammy("#main", function () {
@@ -43,6 +43,16 @@ $(() => {
 
     this.post("#/create", (context) => {
       createForm.call(context);
+    });
+
+    this.put("#/edit/:id", (context) => {
+      editTeam.call(context);
+    });
+
+    this.get("#/leave", leaveTeam);
+
+    this.post("#/join/:id", (context) => {
+      joinTeam.call(context);
     });
   });
   app.run();

@@ -10,11 +10,14 @@ export default async function () {
 
   const data = await getTeamById(this.params.id);
   Object.assign({ data }, this.app.userData);
+
   if (data.ownerId === this.app.userData.userId) {
     data.isAuthor = true;
-  }
-  if (data.objectId === this.app.userData.teamId) {
     data.isOnTeam = true;
   }
+  // if (data.objectId === localStorage.getItem("teamId")) {
+  //   data.isOnTeam = true;
+  // }
+
   this.partial("./templates/catalog/details.hbs", data);
 }

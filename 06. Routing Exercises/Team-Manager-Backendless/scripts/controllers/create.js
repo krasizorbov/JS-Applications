@@ -10,7 +10,13 @@ export default async function () {
 }
 
 export async function createForm() {
-  const team = { name: this.params.name, comment: this.params.comment };
+  const team = {
+    name: this.params.name,
+    comment: this.params.comment,
+    members: [],
+  };
+  const username = localStorage.getItem("username");
+  team.members.push({ username: username });
   if (team.name === "" || team.comment === "") {
     alert("Fields cannot be empty!");
     return;
@@ -22,7 +28,11 @@ export async function createForm() {
       alert(result.message);
       return;
     }
-    this.app.userData.hasTeam = true;
+    // this.app.userData.hasTeam = true;
+    // this.app.userData.isAuthor = true;
+    // this.app.userData.isOnTeam = true;
+
+    localStorage.setItem("teamId", result.objectId);
     this.app.userData.teamId = result.objectId;
     this.redirect(`#/catalog/${result.objectId}`);
   } catch (error) {
