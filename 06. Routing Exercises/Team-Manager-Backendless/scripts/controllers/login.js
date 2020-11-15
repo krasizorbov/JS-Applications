@@ -23,7 +23,6 @@ export async function loginForm() {
       this.app.userData.hasTeam = true;
       this.app.userData.isOnTeam = true;
     }
-    console.log(this.app.userData);
     localStorage.setItem("userToken", result["user-token"]);
     localStorage.setItem("username", result.username);
     localStorage.setItem("userId", result.objectId);

@@ -1,5 +1,4 @@
 export default async function () {
-  console.log(this.app.userData);
   this.partials = {
     header: await this.load("./templates/common/header.hbs"),
     footer: await this.load("./templates/common/footer.hbs"),
