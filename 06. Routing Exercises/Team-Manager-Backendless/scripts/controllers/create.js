@@ -28,9 +28,9 @@ export async function createForm() {
       alert(result.message);
       return;
     }
-    // this.app.userData.hasTeam = true;
-    // this.app.userData.isAuthor = true;
-    // this.app.userData.isOnTeam = true;
+    this.app.userData.hasTeam = true;
+    this.app.userData.isAuthor = true;
+    this.app.userData.isOnTeam = true;
 
     localStorage.setItem("teamId", result.objectId);
     this.app.userData.teamId = result.objectId;

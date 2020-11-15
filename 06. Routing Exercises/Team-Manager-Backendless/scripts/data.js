@@ -130,13 +130,8 @@ export async function edit(team) {
   return data;
 }
 
-export async function leave(id) {
+export async function leave(team, id) {
   const token = localStorage.getItem("userToken");
-  const username = localStorage.getItem("username");
-  const team = await getTeamById(id);
-  const nameToRemove = team.members.find((m) => m.username === username);
-  const index = team.members.indexOf(nameToRemove);
-  team.members.splice(index, 1);
   if (!token) {
     alert("User is not logged in!");
   }
@@ -156,13 +151,13 @@ export async function leave(id) {
   return data;
 }
 
-export async function join(team) {
+export async function join(team, id) {
   const token = localStorage.getItem("userToken");
   const userId = localStorage.getItem("userId");
   if (!token) {
     alert("User is not logged in!");
   }
-  const response = await fetch(editTeamsURL + this.params.id, {
+  const response = await fetch(editTeamsURL + id, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",

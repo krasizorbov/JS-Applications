@@ -33,9 +33,13 @@ export async function editTeam() {
 }
 
 export async function leaveTeam() {
-  const teamId = localStorage.getItem("teamId");
+  const username = localStorage.getItem("username");
+  const team = await getTeamById(this.params.id);
+  const nameToRemove = team.members.find((m) => m.username === username);
+  const index = team.members.indexOf(nameToRemove);
+  team.members.splice(index, 1);
   try {
-    const result = await leave(teamId);
+    const result = await leave(team, this.params.id);
     if (result.hasOwnProperty("errorData")) {
       alert(result.message);
       return;
@@ -43,7 +47,7 @@ export async function leaveTeam() {
     const userId = localStorage.getItem("userId");
     await updateUserDoesNotHaveTeamBoolean(userId);
     this.app.userData.isOnTeam = false;
-    this.redirect(`#/home`);
+    this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);
   }
@@ -51,14 +55,15 @@ export async function leaveTeam() {
 
 export async function joinTeam() {
   const team = await getTeamById(this.params.id);
+  const username = localStorage.getItem("username");
+  team.members.push({ username: username });
   try {
-    const result = await join(team);
+    const result = await join(team, this.params.id);
     if (result.hasOwnProperty("errorData")) {
       alert(result.message);
       return;
     }
-    this.app.userData.isOnTeam = true;
-    this.redirect(`#/home`);
+    this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);
   }

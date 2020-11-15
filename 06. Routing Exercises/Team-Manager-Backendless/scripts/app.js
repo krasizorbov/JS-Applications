@@ -49,9 +49,9 @@ $(() => {
       editTeam.call(context);
     });
 
-    this.get("#/leave", leaveTeam);
+    this.get("#/leave/:id", leaveTeam);
 
-    this.post("#/join/:id", (context) => {
+    this.get("#/join/:id", (context) => {
       joinTeam.call(context);
     });
   });

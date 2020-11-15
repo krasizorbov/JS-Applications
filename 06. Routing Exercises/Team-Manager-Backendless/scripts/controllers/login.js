@@ -40,6 +40,7 @@ export async function logout() {
   this.app.userData.userId = undefined;
   this.app.userData.hasTeam = false;
   this.app.userData.isAuthor = false;
+  this.app.userData.isOnTeam = false;
   localStorage.removeItem("userToken");
   localStorage.removeItem("username");
   localStorage.removeItem("userId");
