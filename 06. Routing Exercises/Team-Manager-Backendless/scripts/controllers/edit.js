@@ -62,7 +62,7 @@ export async function joinTeam() {
     alert(
       "You are already a member of a team!\nPlease leave your current team first!"
     );
-    this.redirect(`#/catalog/${this.params.id}`);
+    this.redirect(`#/catalog`);
     return;
   }
   const team = await getTeamById(this.params.id);
