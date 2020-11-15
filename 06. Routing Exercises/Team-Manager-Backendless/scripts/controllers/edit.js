@@ -54,6 +54,12 @@ export async function leaveTeam() {
 }
 
 export async function joinTeam() {
+  if (this.app.userData.isOnTeam === true) {
+    alert(
+      "You are already a member of a team!\nPlease leave your current team first!"
+    );
+    return;
+  }
   const team = await getTeamById(this.params.id);
   const username = localStorage.getItem("username");
   team.members.push({ username: username });
