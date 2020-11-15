@@ -45,7 +45,7 @@ $(() => {
       createForm.call(context);
     });
 
-    this.put("#/edit/:id", (context) => {
+    this.post("#/edit/:id", (context) => {
       editTeam.call(context);
     });
 

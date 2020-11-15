@@ -47,6 +47,7 @@ export async function leaveTeam() {
     const userId = localStorage.getItem("userId");
     await updateUserDoesNotHaveTeamBoolean(userId);
     this.app.userData.isOnTeam = false;
+    this.app.userData.hasTeam = false;
     this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);
@@ -69,6 +70,7 @@ export async function joinTeam() {
       alert(result.message);
       return;
     }
+    this.app.userData.hasTeam = true;
     this.redirect(`#/catalog/${this.params.id}`);
   } catch (error) {
     alert(error.message);
