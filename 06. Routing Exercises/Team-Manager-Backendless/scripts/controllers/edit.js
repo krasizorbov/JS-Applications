@@ -13,7 +13,6 @@ export default async function () {
   };
   const team = await getTeamById(this.params.id);
   const data = Object.assign(team, this.app.userData);
-  console.log(data);
   this.partial("./templates/edit/editPage.hbs", data);
 }
 
