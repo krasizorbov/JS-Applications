@@ -107,14 +107,12 @@ export async function getTeams() {
   return (await fetch(teamsURL)).json();
 }
 
-export async function edit(team) {
+export async function edit(team, id) {
   const token = localStorage.getItem("userToken");
-  const teamId = localStorage.getItem("teamId");
-
   if (!token) {
     alert("User is not logged in!");
   }
-  const response = await fetch(editTeamsURL + teamId, {
+  const response = await fetch(editTeamsURL + id, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",

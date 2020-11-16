@@ -26,7 +26,7 @@ export async function loginForm() {
     localStorage.setItem("userToken", result["user-token"]);
     localStorage.setItem("username", result.username);
     localStorage.setItem("userId", result.objectId);
-    console.log(localStorage.getItem("userToken"));
+    //console.log(localStorage.getItem("userToken"));
     this.redirect("#/home");
   } catch (error) {
     alert(error.message);

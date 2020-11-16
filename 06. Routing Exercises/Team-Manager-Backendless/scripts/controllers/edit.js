@@ -11,18 +11,23 @@ export default async function () {
     footer: await this.load("./templates/common/footer.hbs"),
     editForm: await this.load("./templates/edit/editForm.hbs"),
   };
-  this.partial("./templates/edit/editPage.hbs", this.app.data);
+  const team = await getTeamById(this.params.id);
+  const data = Object.assign(team, this.app.userData);
+  console.log(data);
+  this.partial("./templates/edit/editPage.hbs", data);
 }
 
 export async function editTeam() {
   const team = { name: this.params.name, comment: this.params.comment };
+  const teamId = this.params.id;
+  console.log(team);
   if (team.name === "" || team.comment === "") {
     alert("Fields cannot be empty!");
     return;
   }
 
   try {
-    const result = await edit(team);
+    const result = await edit(team, teamId);
     if (result.hasOwnProperty("errorData")) {
       alert(result.message);
       return;
