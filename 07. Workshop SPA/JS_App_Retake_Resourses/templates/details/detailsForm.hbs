@@ -1,0 +1,20 @@
+<div class="offer-details">
+    <h1>{{name}}</h1>
+    <div class="info">
+        <img src="{{image}}" alt="">
+        <div class="description">{{content}}
+            <br>
+            <br>
+            <p class="price">${{price}}</p>
+        </div>
+    </div>
+    <div class="actions">
+        {{#if isCreator}}
+        <a>Edit</a>
+        <a>Delete</a>
+        {{else}}
+        <a>Buy</a>
+        {{/if}}
+        <span>You bought it</span>
+    </div>
+</div>

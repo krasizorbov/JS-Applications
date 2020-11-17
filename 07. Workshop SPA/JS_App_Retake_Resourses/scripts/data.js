@@ -56,3 +56,11 @@ export async function createShoe(team) {
   }
   return data;
 }
+
+export async function getShoes() {
+  return (await fetch(shoesURL)).json();
+}
+
+export async function getShoeById(id) {
+  return (await fetch(shoesURL + "/" + id)).json();
+}

@@ -7,6 +7,7 @@ export default async function () {
     createForm: await this.load("./templates/create/createForm.hbs"),
   };
   this.partial("./templates/create/createPage.hbs", this.app.userData);
+  //this.partial("./templates/home/home.hbs", this.app.userData);
 }
 
 export async function createForm() {
@@ -23,9 +24,9 @@ export async function createForm() {
     price: this.params.price,
     image: this.params.image,
     brand: this.params.brand,
+    content: this.params.content,
     buyers: [],
   };
-  const email = localStorage.getItem("email");
 
   try {
     const result = await createShoe(shoe);
@@ -34,7 +35,6 @@ export async function createForm() {
       return;
     }
     this.app.userData.isCreator = true;
-
     localStorage.setItem("shoeId", result.objectId);
     this.app.userData.shoeId = result.objectId;
     this.redirect("index.html");

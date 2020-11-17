@@ -1,8 +1,7 @@
 import home from "./controllers/home.js";
 import login, { loginForm, logout } from "./controllers/login.js";
 import register, { registerForm } from "./controllers/register.js";
-// import catalog from "./controllers/catalog.js";
-// import details from "./controllers/details.js";
+import details from "./controllers/details.js";
 import create, { createForm } from "./controllers/create.js";
 // import edit, { editTeam, leaveTeam, joinTeam } from "./controllers/edit.js";
 
@@ -22,7 +21,7 @@ $(() => {
 
     this.get("#/create", create);
 
-    // this.get("#/edit/:id", edit);
+    this.get("#/details/:id", details);
 
     this.post("#/register", (context) => {
       registerForm.call(context);
