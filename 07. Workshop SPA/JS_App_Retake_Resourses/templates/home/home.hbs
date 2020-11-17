@@ -1,0 +1,21 @@
+{{> header}}
+{{#if loggedIn}}
+<h1>No shoes to display. Be the first to create new offer...</h1>
+{{else}}
+<div class="shoes">
+    <div class="container">
+
+        <div class="about-us">
+            <div>
+                <img src="../public/shoes.jpg" alt="">
+                <img src="../public/shoes2.jpg" alt="">
+            </div>
+            <p>
+                <a href="#/register">Register Now</a> and Try it!
+            </p>
+        </div>
+    </div>
+
+    {{/if}}
+
+    {{> footer}}
