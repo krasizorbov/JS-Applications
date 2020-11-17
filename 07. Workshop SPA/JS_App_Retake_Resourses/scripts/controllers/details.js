@@ -8,13 +8,12 @@ export default async function () {
   };
 
   const data = await getShoeById(this.params.id);
-  Object.assign({ data }, this.app.userData);
+  Object.assign(data, this.app.userData);
 
   if (data.ownerId === localStorage.getItem("userId")) {
     data.isCreator = true;
   } else {
     data.isCreator = false;
   }
-  console.log(this.app.userData.loggedIn);
   this.partial("./templates/details/detailsPage.hbs", data);
 }

@@ -22,14 +22,11 @@ export async function loginForm() {
     this.app.userData.loggedIn = true;
     this.app.userData.email = result.email;
     this.app.userData.userId = result.objectId;
-    // if (result.hasTeam === true) {
-    //   this.app.userData.hasTeam = true;
-    //   this.app.userData.isOnTeam = true;
-    // }
+
     localStorage.setItem("userToken", result["user-token"]);
     localStorage.setItem("email", result.email);
     localStorage.setItem("userId", result.objectId);
-    //console.log(localStorage.getItem("userToken"));
+
     this.redirect("index.html");
   } catch (error) {
     alert(error.message);
