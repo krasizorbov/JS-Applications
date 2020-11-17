@@ -7,7 +7,6 @@ export default async function () {
     createForm: await this.load("./templates/create/createForm.hbs"),
   };
   this.partial("./templates/create/createPage.hbs", this.app.userData);
-  //this.partial("./templates/home/home.hbs", this.app.userData);
 }
 
 export async function createForm() {

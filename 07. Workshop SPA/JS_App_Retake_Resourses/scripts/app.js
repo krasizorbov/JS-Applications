@@ -3,6 +3,7 @@ import login, { loginForm, logout } from "./controllers/login.js";
 import register, { registerForm } from "./controllers/register.js";
 import details from "./controllers/details.js";
 import create, { createForm } from "./controllers/create.js";
+import { del } from "./controllers/delete.js";
 // import edit, { editTeam, leaveTeam, joinTeam } from "./controllers/edit.js";
 
 $(() => {
@@ -33,6 +34,10 @@ $(() => {
 
     this.post("#/create", (context) => {
       createForm.call(context);
+    });
+
+    this.get("#/delete/:id", (context) => {
+      del.call(context);
     });
 
     // this.post("#/edit/:id", (context) => {

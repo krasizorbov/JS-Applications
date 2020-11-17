@@ -9,6 +9,7 @@ export default async function () {
 
   const data = await getShoeById(this.params.id);
   Object.assign(data, this.app.userData);
+  data.count = data.buyers.length;
 
   if (data.ownerId === localStorage.getItem("userId")) {
     data.isCreator = true;

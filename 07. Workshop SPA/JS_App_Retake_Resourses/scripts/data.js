@@ -4,6 +4,7 @@ const registerURL = `https://api.backendless.com/${apiID}/${apiKEY}/users/regist
 const loginURL = `https://api.backendless.com/${apiID}/${apiKEY}/users/login`;
 const logoutURL = `https://api.backendless.com/${apiID}/${apiKEY}/users/logout`;
 const shoesURL = `https://api.backendless.com/${apiID}/${apiKEY}/data/shoes`;
+const deleteURL = `https://api.backendless.com/${apiID}/${apiKEY}/data/shoes/`;
 
 export async function register(email, password) {
   const response = await fetch(registerURL, {
@@ -63,4 +64,14 @@ export async function getShoes() {
 
 export async function getShoeById(id) {
   return (await fetch(shoesURL + "/" + id)).json();
+}
+
+export async function deleteShoe(id) {
+  const token = localStorage.getItem("userToken");
+  if (!token) {
+    alert("User is not logged in!");
+  }
+  const response = await fetch(deleteURL + id, { method: "DELETE" });
+  const data = await response.json();
+  return data;
 }

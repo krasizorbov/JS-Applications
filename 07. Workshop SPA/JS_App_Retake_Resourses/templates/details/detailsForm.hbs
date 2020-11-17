@@ -5,13 +5,15 @@
         <div class="description">{{content}}
             <br>
             <br>
+            <p>Buyers: {{count}}</p>
+            <br>
             <p class="price">${{price}}</p>
         </div>
     </div>
     <div class="actions">
         {{#if isCreator}}
         <a>Edit</a>
-        <a>Delete</a>
+        <a href="#/delete/{{objectId}}" method="delete">Delete</a>
         {{else}}
         <a>Buy</a>
         {{/if}}
