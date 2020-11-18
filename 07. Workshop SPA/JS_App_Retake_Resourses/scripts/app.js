@@ -48,12 +48,6 @@ $(() => {
     this.post("#/edit/:id", (context) => {
       editShoe.call(context);
     });
-
-    // this.get("#/leave/:id", leaveTeam);
-
-    // this.get("#/join/:id", (context) => {
-    //   joinTeam.call(context);
-    // });
   });
   app.run();
 });
