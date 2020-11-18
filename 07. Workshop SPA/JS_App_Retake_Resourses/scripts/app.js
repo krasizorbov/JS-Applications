@@ -4,7 +4,8 @@ import register, { registerForm } from "./controllers/register.js";
 import details from "./controllers/details.js";
 import create, { createForm } from "./controllers/create.js";
 import { del } from "./controllers/delete.js";
-// import edit, { editTeam, leaveTeam, joinTeam } from "./controllers/edit.js";
+import edit, { editShoe } from "./controllers/edit.js";
+import { buyShoe } from "./controllers/buy.js";
 
 $(() => {
   const app = Sammy("#main", function () {
@@ -24,6 +25,10 @@ $(() => {
 
     this.get("#/details/:id", details);
 
+    this.get("#/edit/:id", edit);
+
+    this.get("#/buy/:id", buyShoe);
+
     this.post("#/register", (context) => {
       registerForm.call(context);
     });
@@ -40,9 +45,9 @@ $(() => {
       del.call(context);
     });
 
-    // this.post("#/edit/:id", (context) => {
-    //   editTeam.call(context);
-    // });
+    this.post("#/edit/:id", (context) => {
+      editShoe.call(context);
+    });
 
     // this.get("#/leave/:id", leaveTeam);
 

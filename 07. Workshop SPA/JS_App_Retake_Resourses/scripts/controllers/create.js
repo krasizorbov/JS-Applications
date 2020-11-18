@@ -14,6 +14,7 @@ export async function createForm() {
     this.params.name === "" ||
     this.params.price === "" ||
     this.params.image === "" ||
+    this.params.content === "" ||
     this.params.brand === ""
   ) {
     return;

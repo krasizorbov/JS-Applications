@@ -5,6 +5,7 @@ const loginURL = `https://api.backendless.com/${apiID}/${apiKEY}/users/login`;
 const logoutURL = `https://api.backendless.com/${apiID}/${apiKEY}/users/logout`;
 const shoesURL = `https://api.backendless.com/${apiID}/${apiKEY}/data/shoes`;
 const deleteURL = `https://api.backendless.com/${apiID}/${apiKEY}/data/shoes/`;
+const editShoesURL = `https://api.backendless.com/${apiID}/${apiKEY}/data/shoes/`;
 
 export async function register(email, password) {
   const response = await fetch(registerURL, {
@@ -73,5 +74,47 @@ export async function deleteShoe(id) {
   }
   const response = await fetch(deleteURL + id, { method: "DELETE" });
   const data = await response.json();
+  return data;
+}
+
+export async function edit(shoe, id) {
+  const token = localStorage.getItem("userToken");
+  if (!token) {
+    alert("User is not logged in!");
+  }
+  const response = await fetch(editShoesURL + id, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      "user-token": localStorage.getItem("userToken"),
+    },
+    body: JSON.stringify(shoe),
+  });
+  const data = await response.json();
+  if (data.hasOwnProperty("errorData")) {
+    alert(data.message);
+    return;
+  }
+  return data;
+}
+
+export async function buy(shoe, id) {
+  const token = localStorage.getItem("userToken");
+  if (!token) {
+    alert("User is not logged in!");
+  }
+  const response = await fetch(editShoesURL + id, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      "user-token": localStorage.getItem("userToken"),
+    },
+    body: JSON.stringify(shoe),
+  });
+  const data = await response.json();
+  if (data.hasOwnProperty("errorData")) {
+    alert(data.message);
+    return;
+  }
   return data;
 }
