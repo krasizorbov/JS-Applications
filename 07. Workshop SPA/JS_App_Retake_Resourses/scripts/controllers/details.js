@@ -11,6 +11,12 @@ export default async function () {
   Object.assign(data, this.app.userData);
   data.count = data.buyers.length;
 
+  if (this.app.userData.articles.includes(this.params.id)) {
+    data.bought = false;
+  } else {
+    data.bought = true;
+  }
+
   if (data.ownerId === localStorage.getItem("userId")) {
     data.isCreator = true;
   } else {

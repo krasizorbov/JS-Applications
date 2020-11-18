@@ -10,6 +10,12 @@ export async function buyShoe() {
       alert(result.message);
       return;
     }
+    this.app.userData.articles.push(this.params.id);
+    if (this.app.userData.articles.includes(this.params.id)) {
+      this.app.userData.bought = false;
+    } else {
+      this.app.userData.bought = true;
+    }
     this.redirect(`#/details/${shoe.objectId}`);
   } catch (error) {
     alert(error.message);

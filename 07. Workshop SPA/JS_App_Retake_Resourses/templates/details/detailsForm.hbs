@@ -15,8 +15,12 @@
         <a href="#/edit/{{objectId}}" method="get">Edit</a>
         <a href="#/delete/{{objectId}}" method="delete">Delete</a>
         {{else}}
+        {{#if bought}}
         <a href="#/buy/{{objectId}}" method="post">Buy</a>
-        {{/if}}
+        {{else}}
         <span>You bought it</span>
+        {{/if}}
+        {{/if}}
+
     </div>
 </div>

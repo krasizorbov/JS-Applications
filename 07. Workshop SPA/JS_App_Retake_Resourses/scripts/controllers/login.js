@@ -20,8 +20,10 @@ export async function loginForm() {
       return;
     }
     this.app.userData.loggedIn = true;
+    this.app.userData.bought = true;
     this.app.userData.email = result.email;
     this.app.userData.userId = result.objectId;
+    this.app.userData.articles = [];
 
     localStorage.setItem("userToken", result["user-token"]);
     localStorage.setItem("email", result.email);
@@ -37,6 +39,7 @@ export async function logout() {
   this.app.userData.loggedIn = false;
   this.app.userData.email = undefined;
   this.app.userData.userId = undefined;
+  this.app.userData.articles = [];
   localStorage.removeItem("userToken");
   localStorage.removeItem("email");
   localStorage.removeItem("userId");
