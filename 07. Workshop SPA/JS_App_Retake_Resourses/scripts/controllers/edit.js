@@ -7,7 +7,7 @@ export default async function () {
     footer: await this.load("./templates/common/footer.hbs"),
     editForm: await this.load("./templates/edit/editForm.hbs"),
   };
-  const form = await fetch("./templates/edit/editForm.hbs");
+
   const shoe = await getShoeById(this.params.id);
   const data = Object.assign(shoe, this.app.userData);
   this.partial("./templates/edit/editPage.hbs", data);
@@ -21,6 +21,7 @@ export async function editShoe() {
     comment: this.params.comment,
     brand: this.params.brand,
   };
+  console.log(shoe);
   const shoeId = this.params.id;
   if (
     shoe.name === "" ||
