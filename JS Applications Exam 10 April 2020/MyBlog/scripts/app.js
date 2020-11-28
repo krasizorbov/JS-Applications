@@ -5,7 +5,6 @@ import details from "./controllers/details.js";
 import create, { createForm } from "./controllers/create.js";
 import { del } from "./controllers/delete.js";
 import edit, { editPost } from "./controllers/edit.js";
-// import { buyShoe } from "./controllers/buy.js";
 
 $(() => {
   const app = Sammy("#root", function () {
@@ -28,8 +27,6 @@ $(() => {
     this.get("#/details/:id", details);
 
     this.get("#/edit/:id", edit);
-
-    // this.get("#/buy/:id", buyShoe);
 
     this.post("#/register", (context) => {
       registerForm.call(context);
