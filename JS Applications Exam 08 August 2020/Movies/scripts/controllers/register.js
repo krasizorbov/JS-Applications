@@ -32,7 +32,7 @@ export async function registerForm() {
       alert(result.message);
       return;
     }
-    this.redirect("indexExam.html");
+    this.redirect("#/home");
   } catch (error) {
     alert(error.message);
   }

@@ -1,5 +1,5 @@
 import home from "./controllers/home.js";
-// import login, { loginForm, logout } from "./controllers/login.js";
+import login, { loginForm, logout } from "./controllers/login.js";
 import register, { registerForm } from "./controllers/register.js";
 // import details from "./controllers/details.js";
 // import create, { createForm } from "./controllers/create.js";
@@ -13,13 +13,15 @@ $(() => {
 
     this.userData = { loggedIn: false };
 
-    this.get("indexExam.html", home);
+    this.get("index.html", home);
+    this.get("#/home", home);
+    this.get("/", home);
 
     this.get("#/register", register);
 
-    // this.get("#/login", login);
+    this.get("#/login", login);
 
-    // this.get("#/logout", logout);
+    this.get("#/logout", logout);
 
     // this.get("#/create", create);
 
@@ -33,9 +35,9 @@ $(() => {
       registerForm.call(context);
     });
 
-    // this.post("#/login", (context) => {
-    //   loginForm.call(context);
-    // });
+    this.post("#/login", (context) => {
+      loginForm.call(context);
+    });
 
     // this.post("#/create", (context) => {
     //   createForm.call(context);

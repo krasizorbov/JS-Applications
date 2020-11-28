@@ -1,0 +1,30 @@
+{{> header}}
+<!-- Home -->
+{{#if loggedIn}}
+<section id="home-logged">
+    <section class="first-section">
+        <section class="background-container">
+            {{> createForm}}
+        </section>
+    </section>
+    <section class="second-section">
+        <h3>Articles</h3>
+        <hr>
+        <div class="posts-row">
+            {{#each posts}}
+            {{> post}}
+            {{/each}}
+        </div>
+    </section>
+</section>
+{{else}}
+<section id="home">
+    <section class="background-container">
+        <h1>Welcome to MyBlog!</h1>
+        <div class="auth-buttons">
+            <a href="#/login">Login</a>
+            <a href="#/register">Register</a>
+        </div>
+    </section>
+</section>
+{{/if}}

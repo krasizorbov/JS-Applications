@@ -16,3 +16,24 @@ export async function register(email, password) {
   const data = await response.json();
   return data;
 }
+
+export async function logoutGet() {
+  const token = localStorage.getItem("userToken");
+  if (!token) {
+    alert("User is not logged in!");
+  }
+  return fetch(logoutURL, {
+    method: "GET",
+    headers: { "user-token": token },
+  });
+}
+
+export async function login(email, password) {
+  const response = await fetch(loginURL, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ login: email, password }),
+  });
+  const data = await response.json();
+  return data;
+}
