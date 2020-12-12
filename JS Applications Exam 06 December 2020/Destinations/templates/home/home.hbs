@@ -1,0 +1,30 @@
+{{> header}}
+<!-- Home -->
+<section id="viewCatalog" class="background-img">
+    <div class="added-destinations">
+        {{#if loggedIn}}
+        {{#each destinations}}
+        {{> destination}}
+        {{/each}}
+        {{/if}}
+        {{!-- <a href="" class="added-destination">
+            <img src="https://image.freepik.com/free-vector/showplace-illustration-with-all-famous-buildings-linear-banner_1416-984.jpg"
+                alt="" class="picture-added-destination">
+            <h3>Berlin</h3>
+            <span>to Berlin </span><span>2020-12-22</span>
+        </a>
+        
+        <a href="" class="added-destination">
+            <img src="https://image.freepik.com/free-photo/walking-hooker-valley-track-with-view-mount-cook-new-zealand_181624-17124.jpg"
+                alt="" class="picture-added-destination">
+            <h3>New Zealand</h3>
+            <span>to Auckland </span><span>2021-11-15</span>
+        </a> --}}
+    </div>
+    {{#unless loggedIn}}
+    <div class="guest">
+        No destinations possible! Please sign in...
+    </div>
+    {{/unless}}
+</section>
+{{> footer}}
