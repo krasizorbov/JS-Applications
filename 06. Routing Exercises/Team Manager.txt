@@ -1,0 +1,9 @@
+1. npm init -y
+2. npm i -E jquery
+3. npm i -E sammy
+4. npm i -E handlebars
+5. npm i -E bootstrap
+
+
+
+
